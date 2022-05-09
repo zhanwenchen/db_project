@@ -62,6 +62,9 @@ VALUES (8, 3, 'American Cheese, French Fries', 16, 'Double Cheeseburger', 20);
 INSERT INTO inventory (id, restaurant_id, description, price, name, quantity)
 VALUES (9, 3, '12oz aged ribeye. French fries', 34, 'Steak and Fries', 3);
 
+-- extra dish
+INSERT INTO inventory (id, restaurant_id, description, price, name, quantity)
+VALUES (10, 2, '', 15.95, 'Cumin Chicken', 5);
 
 -- 5. Order Item (One Customer - One Order)
 -- 5.1 Hungry Hippo Orders Hangar Steak and Trout from Last Resort Grill
@@ -97,4 +100,4 @@ select o.id, i.name, oi.quantity, oi.notes, r.name from ordered_item oi
 join `order` o on oi.order_id = o.id
 join inventory i on oi.inventory_id = i.id
 join restaurant r on r.id = o.restaurant_id
-where o.restaurant_id = 1;
+where o.customer_id = 1;

@@ -41,9 +41,9 @@ CREATE TABLE inventory (
   id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
   restaurant_id INT not null,
   description VARCHAR(255),
-  price NUMERIC(2),
+  price DECIMAL(10, 2),
   name VARCHAR(255),
-  quantity NUMERIC,
+  quantity DECIMAL(10, 2),
   CONSTRAINT fk_inventory_restaurant_id
     FOREIGN KEY (restaurant_id)
     REFERENCES restaurant(id)
@@ -55,13 +55,16 @@ CREATE TABLE ordered_item (
   id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
   order_id INT NOT NULL,
   inventory_id INT NOT NULL,
-  quantity NUMERIC,
+  quantity DECIMAL(10, 2),
   notes VARCHAR(1000),
   CONSTRAINT fk_ordered_item_order_id
     FOREIGN KEY (order_id)
-    REFERENCES `order`(id)
+    REFERENCES `order`(id),
+  CONSTRAINT fk_ordered_item_inventory_id
+    FOREIGN KEY (inventory_id)
+    REFERENCES `inventory`(id)
 );
--- 
+--
 -- -- 6. ZC_Menu_Category
 -- DROP TABLE IF EXISTS zc_menu_category;
 -- CREATE TABLE zc_menu_category (
